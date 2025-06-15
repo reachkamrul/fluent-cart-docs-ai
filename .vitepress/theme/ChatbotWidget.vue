@@ -5,6 +5,7 @@
 </template>
 
 <script>
+// Use a standard script block for maximum compatibility
 export default {
   name: 'TestChatbotWidget'
 }
