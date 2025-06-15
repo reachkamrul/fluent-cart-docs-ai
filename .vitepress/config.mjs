@@ -1,11 +1,12 @@
 import { resolve } from 'path';
+import process from 'process';
 export default {
   ignoreDeadLinks: true,
   title: ' ',
   vite: {
     resolve: {
       alias: {
-        '@/components': resolve(__dirname, '../components') // Alias @/components to root components folder
+        '@/components': resolve(process.cwd(), 'components')
       }
     }
   },
