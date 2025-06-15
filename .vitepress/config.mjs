@@ -1,6 +1,14 @@
+import { resolve } from 'path';
 export default {
   ignoreDeadLinks: true,
   title: ' ',
+  vite: {
+    resolve: {
+      alias: {
+        '@/components': resolve(__dirname, '../components') // Alias @/components to root components folder
+      }
+    }
+  },
   titleTemplate: ':title - FluentCart Documentation',
   showingLastUpdated: true,
   description: 'Comprehensive documentation for FluentCart - your all-in-one e-commerce solution.',

@@ -1,5 +1,5 @@
 import DefaultTheme from 'vitepress/theme';
-import ChatbotWidget from './components/ChatbotWidget.vue';
+import ChatbotWidget from '@/components/ChatbotWidget.vue'; // <--- UPDATED IMPORT PATH USING ALIAS
 
 /** @type {import('vitepress').Theme} */
 export default {
@@ -17,7 +17,7 @@ export default {
           </Layout>
         `,
         components: {
-            ChatbotWidget // <--- Ensure this line is present and correct
+            ChatbotWidget
         }
     }
 };
