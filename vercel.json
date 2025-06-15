@@ -1,6 +1,6 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": ".vitepress/dist",
+  "outputDirectory": "guide/.vitepress/dist",
   "rewrites": [
     {
       "source": "/api/(.*)",

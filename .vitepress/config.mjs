@@ -4,7 +4,7 @@ export default {
   titleTemplate: ':title - FluentCart Documentation',
   showingLastUpdated: true,
   description: 'Comprehensive documentation for FluentCart - your all-in-one e-commerce solution.',
-  base: '/',
+  base: '/guide/',
   themeConfig: {
     outline: [2, 3],
     nav: [
