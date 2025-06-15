@@ -1,5 +1,5 @@
 {
-//  "buildCommand": "npm run docs:build",
+  "buildCommand": "npm run docs:build",
   "outputDirectory": ".vitepress/dist",
   "rewrites": [
     {
