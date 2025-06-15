@@ -73,24 +73,33 @@ module.exports = async (req, res) => {
         // Add a delay before polling run status to avoid race conditions
         await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait 2 seconds
 
-        // 4. Poll for the Assistant's response (simplified polling for serverless context)
-        // In a real-world app, you might use webhooks or more robust long-polling.
-        // For a serverless function, a short polling loop is often acceptable.
-        console.log('Polling run status for thread:', currentThreadId);
-        let runStatus = await openai.beta.threads.runs.retrieve(
-            currentThreadId,
-            run.id
-        );
-        console.log('Initial run status response:', JSON.stringify(runStatus));
+        // 4. Poll for the Assistant's response (use fetch instead of SDK for run status)
+        console.log('Polling run status for thread (via fetch):', currentThreadId);
+        const runStatusUrl = `https://api.openai.com/v1/threads/${currentThreadId}/runs/${run.id}`;
+        const runStatusResp = await fetch(runStatusUrl, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+            'Content-Type': 'application/json',
+            'OpenAI-Beta': 'assistants=v2'
+          }
+        });
+        const runStatus = await runStatusResp.json();
+        console.log('Initial run status response (via fetch):', JSON.stringify(runStatus));
 
         // Wait until the run is 'completed' or 'failed'
         while (runStatus.status === "queued" || runStatus.status === "in_progress" || runStatus.status === "cancelling") {
             await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second
-            runStatus = await openai.beta.threads.runs.retrieve(
-                currentThreadId,
-                run.id
-            );
-            console.log('Polled run status response:', JSON.stringify(runStatus));
+            const pollResp = await fetch(runStatusUrl, {
+              method: 'GET',
+              headers: {
+                'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+                'Content-Type': 'application/json',
+                'OpenAI-Beta': 'assistants=v2'
+              }
+            });
+            Object.assign(runStatus, await pollResp.json());
+            console.log('Polled run status response (via fetch):', JSON.stringify(runStatus));
         }
 
         if (runStatus.status === 'completed') {
