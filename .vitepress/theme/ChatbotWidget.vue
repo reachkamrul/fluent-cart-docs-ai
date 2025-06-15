@@ -76,17 +76,21 @@ async function sendMessage() {
   if (!userMessage || isLoading.value) return;
 
   messages.value.push({ role: 'user', content: userMessage });
-  currentMessage.value = ''; // Clear input
+  currentMessage.value = '';
   isLoading.value = true;
   scrollToBottom();
 
   try {
+    const body = { message: userMessage };
+    if (threadId && typeof threadId === 'string' && threadId.startsWith('thread_')) {
+      body.threadId = threadId;
+    }
     const response = await fetch(API_ENDPOINT, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ message: userMessage, threadId: threadId }),
+      body: JSON.stringify(body),
     });
 
     let data;

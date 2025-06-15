@@ -17,6 +17,7 @@ module.exports = async (req, res) => {
 
     // Parse the request body
     const { message, threadId } = req.body;
+    console.log('Received threadId:', threadId);
 
     if (!message) {
         return res.status(400).json({ error: 'Message is required.' });
@@ -27,7 +28,7 @@ module.exports = async (req, res) => {
         return res.status(500).json({ error: 'Assistant ID is not configured.' });
     }
 
-    // Only use threadId if it's a valid OpenAI thread ID
+    // Only use threadId if it's a valid OpenAI thread ID and not the string 'undefined'
     let currentThreadId = (typeof threadId === 'string' && threadId.startsWith('thread_')) ? threadId : null;
     try {
         // 1. Create or retrieve a Thread
