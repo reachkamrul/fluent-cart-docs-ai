@@ -47,6 +47,7 @@ module.exports = async (req, res) => {
         }
 
         // 2. Add the user's message to the Thread
+        console.log('Adding message to thread:', currentThreadId);
         await openai.beta.threads.messages.create(
             currentThreadId,
             {
@@ -56,7 +57,7 @@ module.exports = async (req, res) => {
         );
 
         // 3. Run the Assistant on the Thread
-        // The Assistant will automatically use its attached files for Retrieval.
+        console.log('Running assistant on thread:', currentThreadId);
         const run = await openai.beta.threads.runs.create(
             currentThreadId,
             {
@@ -67,6 +68,7 @@ module.exports = async (req, res) => {
         // 4. Poll for the Assistant's response (simplified polling for serverless context)
         // In a real-world app, you might use webhooks or more robust long-polling.
         // For a serverless function, a short polling loop is often acceptable.
+        console.log('Polling run status for thread:', currentThreadId);
         let runStatus = await openai.beta.threads.runs.retrieve(
             currentThreadId,
             run.id
@@ -83,6 +85,7 @@ module.exports = async (req, res) => {
 
         if (runStatus.status === 'completed') {
             // 5. Retrieve the Assistant's final message
+            console.log('Listing messages for thread:', currentThreadId);
             const messages = await openai.beta.threads.messages.list(
                 currentThreadId,
                 { order: 'desc', limit: 1 } // Get the latest message
