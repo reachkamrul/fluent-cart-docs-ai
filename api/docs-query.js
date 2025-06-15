@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
 
     // Parse the request body
     const { message, threadId } = req.body;
-    console.log('Received threadId:', threadId);
+    console.log('Received threadId:', threadId, 'Type:', typeof threadId);
 
     if (!message) {
         return res.status(400).json({ error: 'Message is required.' });
@@ -28,13 +28,22 @@ module.exports = async (req, res) => {
         return res.status(500).json({ error: 'Assistant ID is not configured.' });
     }
 
-    // Only use threadId if it's a valid OpenAI thread ID and not the string 'undefined'
-    let currentThreadId = (typeof threadId === 'string' && threadId.startsWith('thread_')) ? threadId : null;
+    // Only use threadId if it's a valid OpenAI thread ID and not the string or value undefined
+    let currentThreadId = null;
+    if (
+        typeof threadId === 'string' &&
+        threadId.startsWith('thread_') &&
+        threadId !== 'undefined'
+    ) {
+        currentThreadId = threadId;
+    }
+    console.log('Using currentThreadId:', currentThreadId, 'Type:', typeof currentThreadId);
     try {
         // 1. Create or retrieve a Thread
         if (!currentThreadId) {
             const thread = await openai.beta.threads.create();
             currentThreadId = thread.id;
+            console.log('Created new thread:', currentThreadId);
         }
 
         // 2. Add the user's message to the Thread
