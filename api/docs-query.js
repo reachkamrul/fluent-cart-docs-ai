@@ -17,6 +17,8 @@ module.exports = async (req, res) => {
 
     // Parse the request body
     const { message, threadId } = req.body;
+    console.log('--- Incoming Request ---');
+    console.log('Request body:', JSON.stringify(req.body));
     console.log('Received threadId:', threadId, 'Type:', typeof threadId);
 
     if (!message) {
@@ -44,17 +46,19 @@ module.exports = async (req, res) => {
             const thread = await openai.beta.threads.create();
             currentThreadId = thread.id;
             console.log('Created new thread:', currentThreadId);
+            console.log('Thread creation response:', JSON.stringify(thread));
         }
 
         // 2. Add the user's message to the Thread
         console.log('Adding message to thread:', currentThreadId);
-        await openai.beta.threads.messages.create(
+        const addMsgResp = await openai.beta.threads.messages.create(
             currentThreadId,
             {
                 role: "user",
                 content: message,
             }
         );
+        console.log('Add message response:', JSON.stringify(addMsgResp));
 
         // 3. Run the Assistant on the Thread
         console.log('Running assistant on thread:', currentThreadId);
@@ -64,6 +68,7 @@ module.exports = async (req, res) => {
                 assistant_id: ASSISTANT_ID,
             }
         );
+        console.log('Run creation response:', JSON.stringify(run));
 
         // 4. Poll for the Assistant's response (simplified polling for serverless context)
         // In a real-world app, you might use webhooks or more robust long-polling.
@@ -73,6 +78,7 @@ module.exports = async (req, res) => {
             currentThreadId,
             run.id
         );
+        console.log('Initial run status response:', JSON.stringify(runStatus));
 
         // Wait until the run is 'completed' or 'failed'
         while (runStatus.status === "queued" || runStatus.status === "in_progress" || runStatus.status === "cancelling") {
@@ -81,6 +87,7 @@ module.exports = async (req, res) => {
                 currentThreadId,
                 run.id
             );
+            console.log('Polled run status response:', JSON.stringify(runStatus));
         }
 
         if (runStatus.status === 'completed') {
@@ -90,6 +97,7 @@ module.exports = async (req, res) => {
                 currentThreadId,
                 { order: 'desc', limit: 1 } // Get the latest message
             );
+            console.log('Messages list response:', JSON.stringify(messages));
 
             const assistantMessage = messages.data[0];
             const responseContent = assistantMessage.content.find(
@@ -101,11 +109,18 @@ module.exports = async (req, res) => {
                 threadId: currentThreadId // Return thread ID for continued conversation
             });
         } else {
+            console.error('Assistant run failed:', runStatus.status, JSON.stringify(runStatus));
             return res.status(500).json({ error: `Assistant run failed: ${runStatus.status}` });
         }
 
     } catch (error) {
         console.error('Error interacting with OpenAI Assistant:', error);
+        if (error.stack) {
+            console.error('Stack trace:', error.stack);
+        }
+        if (error.response) {
+            console.error('OpenAI error response:', JSON.stringify(error.response));
+        }
         return res.status(500).json({ error: 'Failed to get response from Assistant.' });
     }
 };
