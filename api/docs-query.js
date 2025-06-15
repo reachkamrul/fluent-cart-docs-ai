@@ -70,6 +70,9 @@ module.exports = async (req, res) => {
         );
         console.log('Run creation response:', JSON.stringify(run));
 
+        // Add a delay before polling run status to avoid race conditions
+        await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait 2 seconds
+
         // 4. Poll for the Assistant's response (simplified polling for serverless context)
         // In a real-world app, you might use webhooks or more robust long-polling.
         // For a serverless function, a short polling loop is often acceptable.
