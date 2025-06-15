@@ -27,7 +27,8 @@ module.exports = async (req, res) => {
         return res.status(500).json({ error: 'Assistant ID is not configured.' });
     }
 
-    let currentThreadId = threadId;
+    // Only use threadId if it's a valid OpenAI thread ID
+    let currentThreadId = (typeof threadId === 'string' && threadId.startsWith('thread_')) ? threadId : null;
     try {
         // 1. Create or retrieve a Thread
         if (!currentThreadId) {
