@@ -1,0 +1,14 @@
+/* Custom styles for the documentation site */
+:root {
+  --vp-c-brand: #3eaf7c;
+  --vp-c-brand-light: #4abf8a;
+  --vp-c-brand-lighter: #5ccf99;
+  --vp-c-brand-dark: #2d8a5d;
+  --vp-c-brand-darker: #1f6b45;
+}
+
+/* Ensure the chatbot widget is always visible */
+.chatbot-widget {
+  position: fixed !important;
+  z-index: 9999 !important;
+} 
