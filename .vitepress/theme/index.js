@@ -1,13 +1,14 @@
-// .vitepress/theme/index.js (or index.ts)
 import DefaultTheme from 'vitepress/theme';
-import ChatbotWidget from './ChatbotWidget.vue'; // Direct sibling import
+import ChatbotWidget from './ChatbotWidget.vue';
 
 /** @type {import('vitepress').Theme} */
 export default {
     extends: DefaultTheme,
     Layout: {
         extends: DefaultTheme.Layout,
-        setup() { },
+        setup() {
+            // This setup is for the Layout, not the component itself.
+        },
         template: `
           <Layout>
           <template #layout-bottom>
