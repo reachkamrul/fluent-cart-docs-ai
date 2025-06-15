@@ -144,12 +144,12 @@ function formatMessage(content) {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  z-index: 1000; /* Ensure it's above other content */
+  z-index: 1000;
   font-family: Arial, sans-serif;
 }
 
 .chatbot-toggle-button {
-  background-color: #3eaf7c; /* VitePress brand color */
+  background-color: #3eaf7c;
   color: white;
   border: none;
   border-radius: 50px;
@@ -175,22 +175,23 @@ function formatMessage(content) {
 }
 
 .chatbot-window {
-  display: none; /* Hidden by default */
+  display: none;
   width: 350px;
   height: 500px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 5px 24px rgba(0, 0, 0, 0.18);
+  border: 1px solid #e0e0e0;
   flex-direction: column;
   overflow: hidden;
-  margin-top: 10px; /* Space between button and window */
+  margin-top: 10px;
   position: absolute;
-  bottom: 60px; /* Position above the toggle button */
+  bottom: 60px;
   right: 0;
 }
 
 .chatbot-container.is-open .chatbot-window {
-  display: flex; /* Show when open */
+  display: flex;
 }
 
 .chatbot-messages {
@@ -203,27 +204,30 @@ function formatMessage(content) {
 
 .message {
   margin-bottom: 10px;
-  padding: 8px 12px;
+  padding: 10px 14px;
   border-radius: 8px;
   max-width: 85%;
   word-wrap: break-word;
+  font-size: 15px;
 }
 
 .message p {
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .message.user {
-  background-color: #e0f7fa; /* Light blue for user */
-  align-self: flex-end; /* Push to right */
-  margin-left: auto; /* Push to right */
+  background-color: #e0f7fa;
+  align-self: flex-end;
+  margin-left: auto;
+  color: #222;
 }
 
 .message.assistant {
-  background-color: #e8e8e8; /* Light grey for assistant */
-  align-self: flex-start; /* Push to left */
-  margin-right: auto; /* Push to left */
+  background-color: #f1f1f1;
+  align-self: flex-start;
+  margin-right: auto;
+  color: #222;
 }
 
 .message.assistant.loading p {
@@ -233,17 +237,25 @@ function formatMessage(content) {
 
 .chatbot-input {
   display: flex;
-  padding: 10px;
+  padding: 12px;
   border-top: 1px solid #eee;
+  background: #fafbfc;
 }
 
 .chatbot-input input {
   flex-grow: 1;
   border: 1px solid #ddd;
   border-radius: 20px;
-  padding: 8px 15px;
-  font-size: 14px;
+  padding: 10px 15px;
+  font-size: 15px;
   margin-right: 10px;
+  background: #fff;
+  color: #222;
+}
+
+.chatbot-input input:disabled {
+  background: #f5f5f5;
+  color: #aaa;
 }
 
 .chatbot-input button {
@@ -251,12 +263,13 @@ function formatMessage(content) {
   color: white;
   border: none;
   border-radius: 20px;
-  padding: 8px 15px;
+  padding: 10px 18px;
   cursor: pointer;
+  font-size: 15px;
   transition: background-color 0.3s ease;
 }
 
-.chatbot-input button:hover {
+.chatbot-input button:hover:enabled {
   background-color: #369c6f;
 }
 </style>
