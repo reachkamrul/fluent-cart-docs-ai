@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// All existing imports from the original Layout.vue
 import { useRoute } from 'vitepress'
 import { computed, provide, useSlots, watch } from 'vue'
 import VPBackdrop from './components/VPBackdrop.vue'
@@ -10,9 +11,14 @@ import VPSidebar from './components/VPSidebar.vue'
 import VPSkipLink from './components/VPSkipLink.vue'
 import { useData } from './composables/data'
 import { useCloseSidebarOnEscape, useSidebar } from './composables/sidebar'
-import ChatbotWidget from './ChatbotWidget.vue' // Ensure this path is correct: './ChatbotWidget.vue'
-// If ChatbotWidget.vue is in .vitepress/theme/components/, then change this import to './components/ChatbotWidget.vue'
-// Based on previous moves, it should be a sibling, so './ChatbotWidget.vue' is correct.
+
+// --- CRITICAL FIX: Import ChatbotWidget here ---
+import ChatbotWidget from './ChatbotWidget.vue'
+// This path assumes ChatbotWidget.vue is directly in .vitepress/theme/
+// as per our previous relocation to that folder.
+// If your ChatbotWidget.vue is in './components/ChatbotWidget.vue' (e.g. .vitepress/theme/components/), use that path instead.
+// Based on our latest common understanding, it's sibling to index.js and Layout.vue.
+// --- END CRITICAL FIX ---
 
 const {
   isOpen: isSidebarOpen,
@@ -85,6 +91,7 @@ provide('hero-image-slot-exists', heroImageSlotExists)
     <VPFooter />
     <slot name="layout-bottom" />
   </div>
+  <Content v-else />
   <ChatbotWidget /> </template>
 
 <style scoped>
