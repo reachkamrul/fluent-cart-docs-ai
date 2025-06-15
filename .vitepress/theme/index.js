@@ -1,5 +1,5 @@
 import DefaultTheme from 'vitepress/theme';
-import ChatbotWidget from '@/components/ChatbotWidget.vue'; // <--- UPDATED IMPORT PATH USING ALIAS
+import ChatbotWidget from './ChatbotWidget.vue';
 
 /** @type {import('vitepress').Theme} */
 export default {

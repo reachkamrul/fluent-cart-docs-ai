@@ -1,15 +1,6 @@
-import { resolve } from 'path';
-import process from 'process';
 export default {
   ignoreDeadLinks: true,
   title: ' ',
-  vite: {
-    resolve: {
-      alias: {
-        '@/components': resolve(process.cwd(), 'components')
-      }
-    }
-  },
   titleTemplate: ':title - FluentCart Documentation',
   showingLastUpdated: true,
   description: 'Comprehensive documentation for FluentCart - your all-in-one e-commerce solution.',
