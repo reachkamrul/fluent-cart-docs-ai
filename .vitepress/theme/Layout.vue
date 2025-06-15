@@ -10,7 +10,9 @@ import VPSidebar from './components/VPSidebar.vue'
 import VPSkipLink from './components/VPSkipLink.vue'
 import { useData } from './composables/data'
 import { useCloseSidebarOnEscape, useSidebar } from './composables/sidebar'
-import ChatbotWidget from './ChatbotWidget.vue' // Ensure this path is correct
+import ChatbotWidget from './ChatbotWidget.vue' // Ensure this path is correct: './ChatbotWidget.vue'
+// If ChatbotWidget.vue is in .vitepress/theme/components/, then change this import to './components/ChatbotWidget.vue'
+// Based on previous moves, it should be a sibling, so './ChatbotWidget.vue' is correct.
 
 const {
   isOpen: isSidebarOpen,
@@ -82,10 +84,8 @@ provide('hero-image-slot-exists', heroImageSlotExists)
 
     <VPFooter />
     <slot name="layout-bottom" />
-    <ChatbotWidget />
   </div>
-  <Content v-else />
-</template>
+  <ChatbotWidget /> </template>
 
 <style scoped>
 .Layout {
