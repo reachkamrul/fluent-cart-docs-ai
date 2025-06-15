@@ -1,28 +1,23 @@
-// .vitepress/theme/index.js (or index.ts)
 import DefaultTheme from 'vitepress/theme';
-import ChatbotWidget from './components/ChatbotWidget.vue'; // Import your chatbot component
+import ChatbotWidget from './components/ChatbotWidget.vue';
 
 /** @type {import('vitepress').Theme} */
 export default {
     extends: DefaultTheme,
-
-    setup() {
-
-    },
-
     Layout: {
         extends: DefaultTheme.Layout,
-        setup() {}, // Keep setup if it exists
-        // Add the chatbot directly to the template
+        setup() {
+            // This setup is for the Layout, not the component itself.
+        },
         template: `
-      <Layout>
-        <template #layout-bottom>
-          <ChatbotWidget />
-        </template>
-      </Layout>
-    `,
+          <Layout>
+          <template #layout-bottom>
+            <ChatbotWidget />
+          </template>
+          </Layout>
+        `,
         components: {
-            ChatbotWidget // Register the component
+            ChatbotWidget // <--- Ensure this line is present and correct
         }
     }
 };
