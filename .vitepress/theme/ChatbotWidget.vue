@@ -47,9 +47,13 @@ let threadId = null; // OpenAI Assistant thread ID for conversation context
 
 // --- Lifecycle Hook ---
 onMounted(() => {
-  // Load threadId from localStorage if continuing a conversation
-  if (localStorage.getItem('openai_docs_thread_id')) {
-    threadId = localStorage.getItem('openai_docs_thread_id');
+  let storedThreadId = localStorage.getItem('openai_docs_thread_id');
+  if (storedThreadId === 'undefined' || !storedThreadId || !storedThreadId.startsWith('thread_')) {
+    storedThreadId = null;
+    localStorage.removeItem('openai_docs_thread_id');
+  }
+  if (storedThreadId) {
+    threadId = storedThreadId;
     messages.value.push({ role: 'assistant', content: 'Welcome back! How can I help you today?' });
   } else {
     messages.value.push({ role: 'assistant', content: 'Hello! Ask me anything about FluentCart documentation.' });
@@ -104,8 +108,10 @@ async function sendMessage() {
       throw new Error(data.error || 'Failed to fetch response');
     }
 
-    threadId = data.threadId; // Update threadId for continued conversation
-    localStorage.setItem('openai_docs_thread_id', threadId); // Persist thread ID
+    if (data.threadId && typeof data.threadId === 'string' && data.threadId.startsWith('thread_')) {
+      threadId = data.threadId;
+      localStorage.setItem('openai_docs_thread_id', threadId);
+    }
 
     messages.value.push({ role: 'assistant', content: data.response });
 
