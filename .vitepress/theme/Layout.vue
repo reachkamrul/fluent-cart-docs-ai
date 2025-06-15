@@ -10,7 +10,8 @@ import VPSidebar from './components/VPSidebar.vue'
 import VPSkipLink from './components/VPSkipLink.vue'
 import { useData } from './composables/data'
 import { useCloseSidebarOnEscape, useSidebar } from './composables/sidebar'
-import ChatbotWidget from './ChatbotWidget.vue'
+import ChatbotWidget from './ChatbotWidget.vue' // Ensure this path is correct
+
 const {
   isOpen: isSidebarOpen,
   open: openSidebar,
@@ -81,11 +82,9 @@ provide('hero-image-slot-exists', heroImageSlotExists)
 
     <VPFooter />
     <slot name="layout-bottom" />
+    <ChatbotWidget />
   </div>
   <Content v-else />
-</template>
-<template>
-  <ChatbotWidget />
 </template>
 
 <style scoped>
