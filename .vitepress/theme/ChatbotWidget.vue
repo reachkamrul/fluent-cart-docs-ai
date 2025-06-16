@@ -112,6 +112,9 @@ async function sendMessage() {
       localStorage.setItem('openai_docs_thread_id', threadId);
     }
 
+    // Log the raw assistant response for debugging
+    console.log('Raw GPT response:', data.response);
+
     messages.value.push({ role: 'assistant', content: data.response });
 
   } catch (error) {
