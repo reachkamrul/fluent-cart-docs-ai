@@ -8,7 +8,7 @@
     <div class="chatbot-window">
       <div class="chatbot-messages" ref="messagesContainer">
         <div v-for="(msg, index) in messages" :key="index" :class="['message', msg.role]">
-          <p v-html="formatMessage(msg.content)"></p>
+          <div v-html="formatMessage(msg.content)" class="markdown-message"></div>
         </div>
         <div v-if="isLoading" class="message assistant loading">
           <p>Thinking...</p>
@@ -273,5 +273,67 @@ function formatMessage(content) {
 
 .chatbot-input button:hover:enabled {
   background-color: #369c6f;
+}
+
+.markdown-message {
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.markdown-message ul,
+.markdown-message ol {
+  margin: 8px 0 8px 24px;
+  padding-left: 18px;
+}
+
+.markdown-message li {
+  margin-bottom: 4px;
+}
+
+.markdown-message strong,
+.markdown-message b {
+  font-weight: 600;
+}
+
+.markdown-message h1,
+.markdown-message h2,
+.markdown-message h3 {
+  font-size: 1.1em;
+  font-weight: 700;
+  margin: 12px 0 6px 0;
+  line-height: 1.3;
+}
+
+.markdown-message h1 { font-size: 1.25em; }
+.markdown-message h2 { font-size: 1.15em; }
+.markdown-message h3 { font-size: 1.08em; }
+
+.markdown-message p {
+  margin: 8px 0;
+}
+
+.markdown-message code {
+  background: #f4f4f4;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 0.95em;
+}
+
+.markdown-message pre {
+  background: #f4f4f4;
+  padding: 8px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 0.95em;
+}
+
+.markdown-message blockquote {
+  border-left: 3px solid #3eaf7c;
+  background: #f9f9f9;
+  margin: 8px 0;
+  padding: 6px 12px;
+  color: #555;
 }
 </style>
