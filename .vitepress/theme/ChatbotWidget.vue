@@ -31,6 +31,7 @@
 
 <script setup>
 import { ref, onMounted, nextTick, watch } from 'vue';
+import { marked } from 'marked';
 
 // --- Configuration ---
 const API_ENDPOINT = `${import.meta.env.BASE_URL}api/docs-query`;
@@ -135,8 +136,7 @@ function scrollToBottom() {
 }
 
 function formatMessage(content) {
-  // Basic markdown-like formatting if needed (e.g., for newlines)
-  return content.replace(/\n/g, '<br>');
+  return marked.parse(content);
 }
 </script>
 
