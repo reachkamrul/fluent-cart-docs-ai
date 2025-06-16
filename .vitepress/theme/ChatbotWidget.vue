@@ -275,6 +275,10 @@ function formatMessage(content) {
   background-color: #369c6f;
 }
 
+/* Moved markdown-message styles to global style block below */
+</style>
+
+<style>
 .markdown-message {
   font-size: 15px;
   line-height: 1.7;
