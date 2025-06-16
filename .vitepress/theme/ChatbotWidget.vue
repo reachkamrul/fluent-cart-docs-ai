@@ -420,4 +420,8 @@ function formatMessage(content) {
   margin: 0.75em 0;
   border-radius: 4px;
 }
+
+.message.user .markdown-message p{
+  margin-bottom: 18px;
+}
 </style>
