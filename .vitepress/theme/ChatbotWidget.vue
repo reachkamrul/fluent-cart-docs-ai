@@ -33,8 +33,7 @@
 import { ref, onMounted, nextTick, watch } from 'vue';
 
 // --- Configuration ---
-// Replace with your deployed serverless function URL
-const API_ENDPOINT = 'https://fluent-cart-docs-ai.vercel.app/api/docs-query'; 
+const API_ENDPOINT = `${import.meta.env.BASE_URL}api/docs-query`;
 
 // --- Reactive State ---
 const isOpen = ref(false); // Controls chatbot window visibility

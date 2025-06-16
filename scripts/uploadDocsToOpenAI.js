@@ -1,4 +1,5 @@
 // scripts/uploadDocsToOpenAI.js
+//node --max-old-space-size=8192 scripts/uploadDocsToOpenAI.js
 
 // At the very top of the file, BEFORE any other requires or definitions
 // Polyfill globalThis.File for Node.js >= 20 if not already present or for older Node.js versions.
