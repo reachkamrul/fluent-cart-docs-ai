@@ -280,64 +280,144 @@ function formatMessage(content) {
 
 <style>
 .markdown-message {
-  font-size: 15px;
-  line-height: 1.7;
-  margin-bottom: 10px;
-  color: #222;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #2c3e50;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+/* Headings */
+.markdown-message h1,
+.markdown-message h2,
+.markdown-message h3,
+.markdown-message h4 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #1a1a1a;
+}
+
+.markdown-message h1 { font-size: 1.4em; }
+.markdown-message h2 { font-size: 1.3em; }
+.markdown-message h3 { font-size: 1.2em; }
+.markdown-message h4 { font-size: 1.1em; }
+
+/* Paragraphs and spacing */
+.markdown-message p {
+  line-height: 1.6;
+  margin-top: 18px;
+}
+
+/* Lists */
 .markdown-message ul,
 .markdown-message ol {
-  margin: 8px 0 8px 24px;
-  padding-left: 18px;
+  padding-left: 1.5em;
+  list-style: outside;
 }
 
 .markdown-message li {
-  margin-bottom: 4px;
+  margin: 0.4em 0;
+  line-height: 1.2;
 }
 
-.markdown-message strong,
-.markdown-message b {
-  font-weight: 600;
+.markdown-message li > p {
+  margin: 0.4em 0;
 }
 
-.markdown-message h1,
-.markdown-message h2,
-.markdown-message h3 {
-  font-size: 1.1em;
-  font-weight: 700;
-  margin: 12px 0 6px 0;
-  line-height: 1.3;
-}
-
-.markdown-message h1 { font-size: 1.25em; }
-.markdown-message h2 { font-size: 1.15em; }
-.markdown-message h3 { font-size: 1.08em; }
-
-.markdown-message p {
-  margin: 8px 0;
-}
-
+/* Code blocks */
 .markdown-message code {
-  background: #f4f4f4;
-  padding: 2px 4px;
-  border-radius: 4px;
-  font-size: 0.95em;
+  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  font-size: 0.9em;
+  background-color: #f6f8fa;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  color: #476582;
 }
 
 .markdown-message pre {
-  background: #f4f4f4;
-  padding: 8px;
+  background-color: #f6f8fa;
   border-radius: 6px;
+  padding: 1em;
+  margin: 0.75em 0;
   overflow-x: auto;
-  font-size: 0.95em;
+  font-size: 0.9em;
+  line-height: 1.5;
 }
 
+.markdown-message pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  color: inherit;
+}
+
+/* Blockquotes */
 .markdown-message blockquote {
-  border-left: 3px solid #3eaf7c;
-  background: #f9f9f9;
-  margin: 8px 0;
-  padding: 6px 12px;
-  color: #555;
+  margin: 0.75em 0;
+  padding: 0.5em 1em;
+  border-left: 4px solid #3eaf7c;
+  background-color: #f8f8f8;
+  color: #666;
+}
+
+.markdown-message blockquote p {
+  margin: 0.5em 0;
+}
+
+/* Links */
+.markdown-message a {
+  color: #3eaf7c;
+  text-decoration: none;
+}
+
+.markdown-message a:hover {
+  text-decoration: underline;
+}
+
+/* Strong and emphasis */
+.markdown-message strong,
+.markdown-message b {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.markdown-message em {
+  font-style: italic;
+  color: #2c3e50;
+}
+
+/* Horizontal rule */
+.markdown-message hr {
+  margin: 1.5em 0;
+  border: none;
+  border-top: 1px solid #eaecef;
+}
+
+/* Tables */
+.markdown-message table {
+  border-collapse: collapse;
+  margin: 0.75em 0;
+  width: 100%;
+  font-size: 0.9em;
+}
+
+.markdown-message th,
+.markdown-message td {
+  padding: 0.6em 1em;
+  border: 1px solid #dfe2e5;
+}
+
+.markdown-message th {
+  background-color: #f6f8fa;
+  font-weight: 600;
+}
+
+/* Images */
+.markdown-message img {
+  max-width: 100%;
+  height: auto;
+  margin: 0.75em 0;
+  border-radius: 4px;
 }
 </style>
